@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+
+</head>
+<body>
+    <p>Send email</p>
+
+    <form class="form">
+        <input type="text" name="name" class="name" id="name">
+        <input type="text" name="telephone" class="tel" id="tel">
+        <button class="btn" type="submit" name="submit" >Отправить</button>
+    </form>
+
+    <script>
+      
+        // nameInput.addEventListener('keyup', () => {
+        //     name+= nameInput.value;
+        // })
+
+        // telInput.addEventListener('keyup', () => {
+        //     tel+= telInput.value;
+        // })
+
+
+        const form = document.querySelector('.form');
+        
+        form.addEventListener('submit', (e) => {
+            const nameInput = document.querySelector('.name').value;
+            const telInput = document.querySelector('.tel').value;
+            e.preventDefault();
+            console.log(nameInput + telInput);
+
+            console.log('Email is sent');
+            Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "mnosov622@gmail.com",
+    Password : "F935677B57EC49AD38B41565D1775CAC8321",
+    To : 'mnosov622@gmail.com',
+    From : "mnosov622@gmail.com",
+    Subject : "Заявка с сайта autn01.ru",
+    Body : `Товар: АУТн-01 <br/>
+    Цена: 3950 руб <br/>
+    Сайт: www.autn01.ru <br/>
+    <br/> <br/>
+    Имя: ${nameInput}
+    <br/>
+    Телефон: ${telInput}
+  
+    `
+}).then(
+  message => console.log(message)
+)
+.then(() => {
+    window.location.href = 'thanks.html'
+})
+form.reset();
+        })
+       
+    </script>
+</body>
+</html>
